@@ -46,3 +46,12 @@ def Fala_para_texto_python():
             finally:
                 print("\r", end="", flush=True)
 			os.system("cls" if os.name == "nt" else "clean")
+		stt_thread = threading.Thread(target=Fala_para_texto_python)
+		print_thread = threading.Thread(target=print_loop)
+		stt_thread.start()
+		print_loop.start()
+		stt_thread.join()
+		print_loop.join()
+
+
+Fala_para_texto_python()
