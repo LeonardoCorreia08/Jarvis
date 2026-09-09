@@ -1,0 +1,4 @@
+SpeechRecognition
+mtranslate
+colorma
+pyaudio
