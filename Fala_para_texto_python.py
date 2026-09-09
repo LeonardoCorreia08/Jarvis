@@ -54,4 +54,4 @@ def Fala_para_texto_python():
 		print_loop.join()
 
 
-Fala_para_texto_python()
+
