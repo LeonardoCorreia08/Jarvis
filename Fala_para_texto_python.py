@@ -6,18 +6,11 @@ from colorama import Fore, Style, init
 
 init(autoreset=True)
 
-def print_loop():
-    # while True:
-    print(Fore.GREEN + "Escutando...", end="", flush=True)
-    print(Style.RESET_ALL, end="", flush=True)
-
-print_loop()
-
 def Traducao_portugues_to_ingles(text):
     ingles_text = translate(text, "en-us")
     return ingles_text
     
-def Fala_para_texto_python():
+def Fala_para_texto():
     recognizer = sr.Recognizer()
     recognizer.dynamic_energy_threshold = False
     recognizer.energy_threshold = 340000
@@ -28,30 +21,29 @@ def Fala_para_texto_python():
     recognizer.non_speaking_duration = 0.2
     
     with sr.Microphone() as source:
+        print(Fore.YELLOW + "Ajustando para o ruído ambiente...")
         recognizer.adjust_for_ambient_noise(source)
+        
         while True:
             print(Fore.GREEN + "Escutando...", end="", flush=True)
             try:
                 audio = recognizer.listen(source, timeout=None)
                 print("\r" + Fore.LIGHTBLACK_EX + "Reconhecendo...", end="", flush=True)
-                recognizer_text = recognizer.recognize_google(audio).lower() 
+                recognizer_text = recognizer.recognize_google(audio, language="pt-BR").lower() 
+                
                 if recognizer_text:
                     trans_text = Traducao_portugues_to_ingles(recognizer_text)
-                    print("\r" + Fore.BLUE + "Ark : " + trans_text)
+                    print("\r" + Fore.BLUE + "Ark : " + trans_text + " " * 20)
                     return trans_text
                 else:
                     return ""
             except sr.UnknownValueError:
-                recognizer_text = ""
-            finally:
-                print("\r", end="", flush=True)
-			os.system("cls" if os.name == "nt" else "clean")
-		stt_thread = threading.Thread(target=Fala_para_texto_python)
-		print_thread = threading.Thread(target=print_loop)
-		stt_thread.start()
-		print_loop.start()
-		stt_thread.join()
-		print_loop.join()
+                print("\r" + Fore.RED + "Não entendi o áudio. Tente novamente." + " " * 20)
+            except Exception as e:
+                print(f"\r{Fore.RED}Erro: {e}" + " " * 20)
 
-
-
+if __name__ == "__main__":
+    # Executa a função diretamente ou via Thread de forma correta
+    stt_thread = threading.Thread(target=Fala_para_texto)
+    stt_thread.start()
+    stt_thread.join()
