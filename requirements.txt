@@ -2,3 +2,5 @@ SpeechRecognition
 mtranslate
 colorma
 pyaudio
+selenium
+webdriver-manager

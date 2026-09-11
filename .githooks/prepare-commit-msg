@@ -1,0 +1,4 @@
+#!/bin/sh
+
+"$(git rev-parse --show-toplevel)/../.venv/Scripts/python.exe" \
+"$(git rev-parse --show-toplevel)/tools/ai_commit.py" "$1"
