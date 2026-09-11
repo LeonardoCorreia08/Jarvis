@@ -43,7 +43,7 @@ def Fala_para_texto():
                 print(f"\r{Fore.RED}Erro: {e}" + " " * 20)
 
 if __name__ == "__main__":
-    # Executa a função diretamente ou via Thread de forma correta
+    # Executa a função diretamente ou via Thread dee forma correta
     stt_thread = threading.Thread(target=Fala_para_texto)
     stt_thread.start()
     stt_thread.join()
