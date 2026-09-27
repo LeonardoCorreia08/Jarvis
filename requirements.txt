@@ -4,3 +4,5 @@ colorma
 pyaudio
 selenium
 webdriver-manager
+google-genai>=2.8.0
+
